@@ -1,6 +1,7 @@
 package com.bilgeadam.controller;
 
 import com.bilgeadam.dto.request.UserRegisterRequestDto;
+import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.UserLoginResponseDto;
 import com.bilgeadam.entity.User;
 import com.bilgeadam.service.UserService;
@@ -32,7 +33,6 @@ public class UserController {
     public ResponseEntity<UserRegisterRequestDto> registerMapper(@RequestBody @Valid UserRegisterRequestDto dto){
         return ResponseEntity.ok(userService.registerMapper(dto));
     }
-
     @PostMapping("/login")
     public ResponseEntity<String> login(String email, String password){
         return ResponseEntity.ok(userService.login(email, password));
@@ -59,6 +59,16 @@ public class UserController {
     @GetMapping("/find-by-id")
     public ResponseEntity<Optional<User>> findById(Integer id){
         return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @PutMapping("/update-dto")
+    public ResponseEntity<User> updateDto(UserUpdateRequestDto dto){
+        return ResponseEntity.ok(userService.updateDto(dto));
+    }
+
+    @PutMapping("/update-mapper")
+    public ResponseEntity<User> updateMapper(UserUpdateRequestDto dto){
+        return ResponseEntity.ok(userService.updateMapper(dto));
     }
     @DeleteMapping("/delete")
     public ResponseEntity<User> delete(Integer id){

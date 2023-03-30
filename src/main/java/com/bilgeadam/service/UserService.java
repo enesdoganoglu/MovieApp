@@ -1,6 +1,7 @@
 package com.bilgeadam.service;
 
 import com.bilgeadam.dto.request.UserRegisterRequestDto;
+import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.UserLoginResponseDto;
 import com.bilgeadam.entity.User;
 
@@ -39,6 +40,26 @@ public class UserService implements ICrudService<User, Integer> {
     @Override
     public User update(User user) {
         return null;
+    }
+
+    //update-dto --> bu şekilde kullanılmamalıdır
+    public User updateDto(UserUpdateRequestDto dto){
+        Optional<User> optionalUser = userRepository.findById(dto.getId());
+        if (optionalUser.isPresent()){
+            optionalUser.get().setName(dto.getName());
+            optionalUser.get().setSurname(dto.getSurname());
+            optionalUser.get().setEmail(dto.getEmail());
+            optionalUser.get().setPhone(dto.getPhone());
+            return userRepository.save(optionalUser.get());
+        }else {
+            throw new NotFoundException("Kullanıcı bulunamadı");
+        }
+    }
+
+    public User updateMapper(UserUpdateRequestDto dto){
+        Optional<User> user = userRepository.findById(dto.getId());
+        IUserMapper.INSTANCE.updateUserFromDto(dto, user.get());
+        return userRepository.save(user.get());
     }
 
     //Sadece admin rolüne sahip kişiler bu işlemi gerçekleştirebilir.
