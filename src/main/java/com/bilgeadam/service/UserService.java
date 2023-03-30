@@ -193,4 +193,16 @@ public class UserService implements ICrudService<User, Integer> {
         }
         return users;
     }
+
+    public List<User> passwordLongerThan(int num){
+        return userRepository.passwordLongerThan(num);
+    }
+
+    public List<User> passwordLongerThan2(int num){
+        return userRepository.passwordLongerThan2(num);
+    }
+
+    public List<User> findByEmailEndsWithIgnoreCase(String email){
+        return userRepository.findByEmailEndsWithIgnoreCase(email);
+    }
 }

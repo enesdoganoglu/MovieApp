@@ -84,4 +84,19 @@ public class UserController {
     public ResponseEntity<List<User>> findByEmailIgnoreCase(String email){
         return ResponseEntity.ok(userService.findByEmailIgnoreCase(email));
     }
+
+    @GetMapping("/pass-longer-than")
+    public ResponseEntity<List<User>> passwordLongerThan(int num){
+        return ResponseEntity.ok(userService.passwordLongerThan(num));
+    }
+
+    @GetMapping("/pass-longer-than2")
+    public ResponseEntity<List<User>> passwordLongerThan2(int num){
+        return ResponseEntity.ok(userService.passwordLongerThan2(num));
+    }
+
+    @GetMapping("/find-by-email-ends-with")
+    public ResponseEntity<List<User>> findByEmailEndsWithIgnoreCase(String email){
+        return ResponseEntity.ok(userService.findByEmailEndsWithIgnoreCase(email));
+    }
 }
