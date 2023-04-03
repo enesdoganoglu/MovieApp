@@ -177,7 +177,7 @@ public class UserService implements ICrudService<User, Integer> {
 
     //custom login --> Arda
     public ResponseEntity customLogin(UserLoginResponseDto dto){
-        Map<ECustomEnum, Object> hm = new HashMap<>();
+        Map<Object, Object> hm = new HashMap<>();
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
         if (optionalUser.isEmpty()){
             hm.put(ECustomEnum.status, false);
