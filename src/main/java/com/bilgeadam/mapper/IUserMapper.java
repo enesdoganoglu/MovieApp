@@ -17,7 +17,6 @@ public interface IUserMapper {
 
     //@MappedTarget --> sizin dto'nuz ile entity'niz arasında bir mappleme yaparak veri güvenliği sağlar
     //ve veri kaybını önler
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserFromDto(UserUpdateRequestDto dto, @MappingTarget User user);
 }

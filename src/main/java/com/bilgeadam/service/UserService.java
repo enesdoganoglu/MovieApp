@@ -34,9 +34,6 @@ public class UserService implements ICrudService<User, Integer> {
         return null;
     }
 
-    /**
-     * !!dto ile yapılacak
-     */
     @Override
     public User update(User user) {
         return null;
@@ -131,6 +128,10 @@ public class UserService implements ICrudService<User, Integer> {
     //mapper-register
     //Aynı email ile ikinci defa kayıt işlemi yapılmamalıdır. Eğer kayıt olan kişi superadmin@mail.com ise
     //UserType=ADMIN ve Status=ACTIVE olmalıdır.
+
+    //metot imzası nedir --> bir metodun dönüş tipini ve parametresini belirtir
+    //sorulduğunda --> "UserRegisterRequestDto dönüş tipinde ve UserRegisterRequestDto tipinde dto parametresi alan bir metottur"
+    //demelisiniz
     public UserRegisterRequestDto registerMapper(UserRegisterRequestDto dto) {
         User user = IUserMapper.INSTANCE.toUserRegisterDto(dto);
         if (userRepository.findByEmailEqualsIgnoreCase(dto.getEmail()).isPresent()){

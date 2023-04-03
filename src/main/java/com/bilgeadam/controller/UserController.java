@@ -70,8 +70,8 @@ public class UserController {
     public ResponseEntity<User> updateMapper(UserUpdateRequestDto dto){
         return ResponseEntity.ok(userService.updateMapper(dto));
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<User> delete(Integer id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<User> delete(@PathVariable Integer id){
         return ResponseEntity.ok(userService.delete(id));
     }
 
