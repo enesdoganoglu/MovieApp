@@ -56,4 +56,19 @@ public class MovieController {
         return ResponseEntity.ok(movieService.countByIdenticalRating(rating));
     }
 
+    @GetMapping("/count-rating-group-by-rating")
+    public ResponseEntity<Object[]> countByRatingGroupByRating(){
+        return ResponseEntity.ok(movieService.countByRatingGroupByRating());
+    }
+
+    @GetMapping("/find-by-rating-in")
+    public ResponseEntity<List<Movie>> findByRatingIn(){
+        return ResponseEntity.ok(movieService.findByRatingIn());
+    }
+
+    @GetMapping("/find-by-contains-name/{name}")
+    public ResponseEntity<List<Movie>> findByNameContainsIgnoreCase(@PathVariable String name){
+        return ResponseEntity.ok(movieService.findByNameContainsIgnoreCase(name));
+    }
+
 }

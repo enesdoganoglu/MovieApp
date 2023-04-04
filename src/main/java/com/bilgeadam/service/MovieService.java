@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +70,18 @@ public class MovieService implements ICrudService<Movie, Integer> {
 
     public Object countByIdenticalRating(double rating){
         return movieRepository.countByIdenticalRating(rating);
+    }
+
+    public Object[] countByRatingGroupByRating(){
+        return movieRepository.countByRatingGroupByRating();
+    }
+
+    public List<Movie> findByRatingIn(){
+        List<Double> ratings = List.of(7.0, 8.0, 9.0);
+        return movieRepository.findByRatingIn(ratings);
+    }
+
+    public List<Movie> findByNameContainsIgnoreCase(String name){
+        return movieRepository.findByNameContainsIgnoreCase(name);
     }
 }
