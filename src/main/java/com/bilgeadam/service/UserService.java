@@ -26,12 +26,12 @@ public class UserService implements ICrudService<User, Integer> {
 
     @Override
     public User save(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
     public Iterable<User> saveAll(Iterable<User> t) {
-        return null;
+        return userRepository.saveAll(t);
     }
 
     @Override
