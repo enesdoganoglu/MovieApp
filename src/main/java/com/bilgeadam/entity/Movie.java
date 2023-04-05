@@ -24,6 +24,7 @@ public class Movie implements Serializable {
     private String name;
     private String country;
     private double rating;
+    @Lob
     private String summary;
     private LocalDate premiered;
     private String url;

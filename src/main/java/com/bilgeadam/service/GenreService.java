@@ -6,6 +6,7 @@ import com.bilgeadam.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,17 +18,17 @@ public class GenreService implements ICrudService<Genre, Integer> {
 
     @Override
     public Genre save(Genre genre) {
-        return null;
+        return genreRepository.save(genre);
     }
 
     @Override
     public Iterable<Genre> saveAll(Iterable<Genre> t) {
-        return null;
+        return genreRepository.saveAll(t);
     }
 
     @Override
     public Genre update(Genre genre) {
-        return null;
+        return genreRepository.saveAndFlush(genre);
     }
 
     @Override
@@ -37,11 +38,35 @@ public class GenreService implements ICrudService<Genre, Integer> {
 
     @Override
     public List<Genre> findAll() {
-        return null;
+        return genreRepository.findAll();
     }
 
     @Override
-    public Optional<Genre> findById(Integer integer) {
-        return Optional.empty();
+    public Optional<Genre> findById(Integer id) {
+        return genreRepository.findById(id);
     }
+
+    //DataImpl için gelen String genre değerinin Integer' a dönüştürülmesi
+    public List<Integer> createGenresWithNames(List<String> genres){
+        List<Integer> genreList = new ArrayList<>();
+        for(String name : genres){
+            Optional<Genre> genre = genreRepository.findOptionalByName(name);
+            if (genre.isPresent()){
+                genreList.add(genre.get().getId());
+            }else {
+                Genre myGenre = Genre.builder()
+                        .name(name)
+                        .build();
+                save(myGenre);
+                genreList.add(myGenre.getId());
+            }
+        }
+        return genreList;
+    }
+
+
+
+
+
+
 }

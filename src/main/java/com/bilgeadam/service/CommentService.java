@@ -62,4 +62,16 @@ public class CommentService implements ICrudService<Comment, Integer> {
         LocalDate date2 = LocalDate.parse(end, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         return commentRepository.findByMovieIdAndDateBetween(movieId, date1, date2);
     }
+
+    public List<Comment> findByUserId(Integer uid) {
+        return commentRepository.findByUserId(uid);
+    }
+
+    public List<Comment> findAllByUserIdAndDateBetween(Integer uid, String start, String end) {
+        LocalDate date1 = LocalDate.parse(start);
+        LocalDate date2 = LocalDate.parse(end);
+        return commentRepository.findAllByUserIdAndDateBetween(uid, date1, date2);
+    }
+
+
 }

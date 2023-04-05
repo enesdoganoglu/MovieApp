@@ -26,18 +26,18 @@ public class User {
     private Integer id;
     @Column(length = 50) //persistence anotasyonudur, jdk kullanmanız yeterlidir
     //validation anotasyonudur, verinin içerisinin boş gönderilmemesini sağlar
-    @NotBlank //sayısal değerler için deneyiniz
-    @NotNull //vernini girilmesi zorunludur
+    //@NotBlank //sayısal değerler için deneyiniz
+    //@NotNull //vernini girilmesi zorunludur
     private String name;
     @Column(length = 50)
-    @Length //hibernate anotasyonu, temel olarak size ile aynı görevi görür. Min-max değerler verilebilir
+    //@Length //hibernate anotasyonu, temel olarak size ile aynı görevi görür. Min-max değerler verilebilir
     private String surname;
     @Email //Bu property'nin email formatta girilmesi gerektiğini anlatır.
     //Bir validation anotasyonudur, bağımlılık yüklenmezse kullanılamaz.
-    @Size(min = 10, max = 50, message = "Min 10 max 50 karakter bulunabilir")
+    //@Size(min = 10, max = 50, message = "Min 10 max 50 karakter bulunabilir")
     private String email;
     @Column(length = 15)
-    @Lob //persistence üyesidir. bir veri tipinin "bigdata" olduğunu gösterir. Max 2048 karakter(String)
+    //@Lob //persistence üyesidir. bir veri tipinin "bigdata" olduğunu gösterir. Max 2048 karakter(String)
     private String phone;
     @Column(length = 32)
     //Bir regex tanımlamak için @Pattern kullanılır. Genel olarak email, password gibi property'ler için kullanılır

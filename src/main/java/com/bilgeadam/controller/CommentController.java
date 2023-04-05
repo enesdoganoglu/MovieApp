@@ -1,7 +1,6 @@
 package com.bilgeadam.controller;
 
 import com.bilgeadam.entity.Comment;
-import com.bilgeadam.entity.Movie;
 import com.bilgeadam.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +33,14 @@ public class CommentController {
     public ResponseEntity<List<Comment>> findByMovieIdAndDateBetween(@PathVariable Integer movieId,
                                                                      String start, String end){
         return ResponseEntity.ok(commentService.findByMovieIdAndDateBetween(movieId, start, end));
+    }
+
+    @GetMapping("/find-by-user-id/{userId}")
+    public  ResponseEntity <List<Comment>> findByUserId(@PathVariable Integer userId){
+        return ResponseEntity.ok(commentService.findByUserId(userId));
+    }
+    @GetMapping("/find-by-user-id-and-date")
+    public   ResponseEntity <List<Comment>> findAllByUserIdAndDateBetween(Integer userId, String start, String end){
+        return ResponseEntity.ok( commentService.findAllByUserIdAndDateBetween(userId,start,end));
     }
 }
