@@ -5,6 +5,8 @@ import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.UserLoginResponseDto;
 import com.bilgeadam.entity.User;
 
+import com.bilgeadam.exception.EErrorType;
+import com.bilgeadam.exception.UserExceptionHandler;
 import com.bilgeadam.mapper.IUserMapper;
 import com.bilgeadam.repository.IUserRepository;
 import com.bilgeadam.utility.ICrudService;
@@ -169,7 +171,7 @@ public class UserService implements ICrudService<User, Integer> {
     public UserLoginResponseDto loginMapper(UserLoginResponseDto dto){
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
         if (optionalUser.isEmpty()) {
-            throw new NotFoundException("Email veya şifre hatalı");
+            throw new UserExceptionHandler(EErrorType.LOGIN_ERROR_USERNAME_DOES_NOT_EXIST);
         } else {
             return IUserMapper.INSTANCE.toUserLoginDto(optionalUser.get());
         }
