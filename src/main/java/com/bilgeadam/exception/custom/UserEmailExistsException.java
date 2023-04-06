@@ -4,10 +4,10 @@ import com.bilgeadam.exception.EErrorType;
 import lombok.Getter;
 
 @Getter
-public class UserNameNotFoundException extends RuntimeException {
+public class UserEmailExistsException extends RuntimeException{
     final EErrorType errorType;
 
-    public UserNameNotFoundException(EErrorType errorType) {
+    public UserEmailExistsException(EErrorType errorType) {
         super(errorType.getMessage());
         this.errorType = errorType;
     }

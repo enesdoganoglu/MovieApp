@@ -7,6 +7,9 @@ import com.bilgeadam.entity.User;
 
 import com.bilgeadam.exception.EErrorType;
 import com.bilgeadam.exception.UserExceptionHandler;
+import com.bilgeadam.exception.custom.UserEmailExistsException;
+import com.bilgeadam.exception.custom.UserNameNotFoundException;
+import com.bilgeadam.exception.custom.UserWrongPasswordException;
 import com.bilgeadam.mapper.IUserMapper;
 import com.bilgeadam.repository.IUserRepository;
 import com.bilgeadam.utility.ICrudService;
@@ -137,10 +140,10 @@ public class UserService implements ICrudService<User, Integer> {
     public UserRegisterRequestDto registerMapper(UserRegisterRequestDto dto) {
         User user = IUserMapper.INSTANCE.toUserRegisterDto(dto);
         if (userRepository.findByEmailEqualsIgnoreCase(dto.getEmail()).isPresent()){
-            throw new RuntimeException("Bu email zaten kayıtlı");
+            throw new UserEmailExistsException(EErrorType.REGISTER_ERROR_EMAIL_EXISTS);
         } else if (!dto.getPassword().equals(dto.getRepassword())
                 || dto.getPassword().isBlank() || dto.getRepassword().isBlank()) {
-            throw new RuntimeException("Şifre alanlarını boş bırakmayınız.");
+            throw new UserWrongPasswordException(EErrorType.LOGIN_ERROR_WRONG_PASSWORD);
         } else if (dto.getEmail().equals("superadmin@mail.com")) {
             user.setUserType(EUserType.ADMIN);
             user.setStatus(EStatus.ACTIVE);
@@ -171,7 +174,7 @@ public class UserService implements ICrudService<User, Integer> {
     public UserLoginResponseDto loginMapper(UserLoginResponseDto dto){
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
         if (optionalUser.isEmpty()) {
-            throw new UserExceptionHandler(EErrorType.LOGIN_ERROR_USERNAME_DOES_NOT_EXIST);
+            throw new UserNameNotFoundException(EErrorType.LOGIN_USER_AND_PASSWORD_EXCEPTION);
         } else {
             return IUserMapper.INSTANCE.toUserLoginDto(optionalUser.get());
         }

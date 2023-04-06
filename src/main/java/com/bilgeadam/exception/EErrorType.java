@@ -26,13 +26,14 @@ public enum EErrorType {
     /*
         Register errors.
      */
-    REGISTER_ERROR_DATA_EXISTS(3000, "Data already exists.", BAD_REQUEST),
+    REGISTER_ERROR_EMAIL_EXISTS(3000, "E-mail zaten kayıtlı.", BAD_REQUEST),
 
     /*
         Authentication errors.
      */
     LOGIN_ERROR_USERNAME_DOES_NOT_EXIST(2001, "Kullanıcı adı bulunamadı.", NOT_FOUND),
-    LOGIN_ERROR_WRONG_PASSWORD(2002, "Şifre yanlış", BAD_REQUEST);
+    LOGIN_ERROR_WRONG_PASSWORD(2002, "Şifre yanlıştır.", BAD_REQUEST),
+    LOGIN_USER_AND_PASSWORD_EXCEPTION(2003, "Email veya şifre hatalıdır.", BAD_REQUEST);
 
     private int code;
     private String message;

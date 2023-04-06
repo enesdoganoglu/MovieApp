@@ -1,5 +1,8 @@
 package com.bilgeadam.exception;
 
+import com.bilgeadam.exception.custom.UserEmailExistsException;
+import com.bilgeadam.exception.custom.UserNameNotFoundException;
+import com.bilgeadam.exception.custom.UserWrongPasswordException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,29 @@ public class GlobalException {
         HttpStatus httpStatus = errorType.getHttpStatus();
         return new ResponseEntity<>(createErrorMessage(errorType,exception), httpStatus);
     }
+
+    @ResponseBody
+    @ExceptionHandler(UserEmailExistsException.class)
+    public ResponseEntity<ErrorMessage> handleUserEmailExistsException(UserEmailExistsException exception){
+        EErrorType errorType = EErrorType.REGISTER_ERROR_EMAIL_EXISTS;
+        HttpStatus httpStatus = errorType.getHttpStatus();
+        return new ResponseEntity<>(createErrorMessage(errorType, exception), httpStatus);
+    }
+    @ResponseBody
+    @ExceptionHandler(UserNameNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleUserNameNotFoundException(UserNameNotFoundException exception){
+        EErrorType errorType = EErrorType.LOGIN_USER_AND_PASSWORD_EXCEPTION;
+        HttpStatus httpStatus = errorType.getHttpStatus();
+        return new ResponseEntity<>(createErrorMessage(errorType, exception), httpStatus);
+    }
+    @ResponseBody
+    @ExceptionHandler(UserWrongPasswordException.class)
+    public ResponseEntity<ErrorMessage> handleUserWrongPasswordException(UserWrongPasswordException exception){
+        EErrorType errorType = EErrorType.LOGIN_ERROR_WRONG_PASSWORD;
+        HttpStatus httpStatus = errorType.getHttpStatus();
+        return new ResponseEntity<>(createErrorMessage(errorType, exception), httpStatus);
+    }
+
 
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
